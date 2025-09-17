@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <a href="/">홈으로 돌아가기</a>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Corporate Financial Dashboard</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              'brand-blue': '#00529B',
+              'brand-secondary': '#00A9E0',
+            }
+          }
+        }
+      }
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/tesseract.js@5/dist/tesseract.min.js"></script>
+  <script type="importmap">
+{
+  "imports": {
+    "recharts": "https://aistudiocdn.com/recharts@^3.1.2",
+    "react-dom/": "https://aistudiocdn.com/react-dom@^19.1.1/",
+    "react/": "https://aistudiocdn.com/react@^19.1.1/",
+    "react": "https://aistudiocdn.com/react@^19.1.1",
+    "vite": "https://aistudiocdn.com/vite@^7.1.3",
+    "@vitejs/plugin-react": "https://aistudiocdn.com/@vitejs/plugin-react@^5.0.2",
+    "url": "https://aistudiocdn.com/url@^0.11.4",
+    "jspdf": "https://aistudiocdn.com/jspdf@^3.0.2",
+    "html2canvas": "https://aistudiocdn.com/html2canvas@^1.4.1",
+    "@google/genai": "https://aistudiocdn.com/@google/genai@^0.19.0"
+  }
+}
+</script>
+<style>
+  @media print {
+    @page {
+      size: A4;
+      margin: 1.5cm;
+    }
+
+    body {
+      -webkit-print-color-adjust: exact;
+      print-color-adjust: exact;
+      background-color: #fff !important;
+      font-size: 9pt; /* Smaller base font for print */
+      color: #000;
+    }
+
+    /* Hide non-printable elements */
+    .no-print {
+      display: none !important;
+    }
+
+    /* Reset layout for printing */
+    main.container {
+      margin: 0 !important;
+      padding: 0 !important;
+      max-width: 100% !important;
+    }
+
+    /* Control page breaks */
+    .print-break-before {
+      page-break-before: always;
+    }
+    .card-print-container {
+      page-break-inside: avoid !important;
+    }
+
+    /* Make layout more compact */
+    h2 {
+      font-size: 1.25rem !important;
+      margin-bottom: 0.5rem !important;
+    }
+    .card-print-container {
+      padding: 0.75rem !important;
+      box-shadow: none !important;
+      border: 1px solid #e2e8f0;
+    }
+    
+    /* Ensure charts are reasonably sized and don't overflow */
+    .recharts-responsive-container {
+      width: 100% !important;
+      height: 240px !important;
+    }
+
+    /* Specific tweaks for dense tables */
+    .financial-statement-table-print th,
+    .financial-statement-table-print td {
+      padding: 4px !important;
+      font-size: 8pt !important;
+    }
+  }
+</style>
+
+<link rel="stylesheet" href="/index.css">
+</head>
+  <body class="bg-slate-50">
+    <div id="root"></div>
+    <script type="module" src="/index.tsx"></script>
+  </body>
+</html>

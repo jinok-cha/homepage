@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <a href="/">홈으로 돌아가기</a>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>상속세 계산기</title>
+    <link rel="stylesheet" href="./index.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/index.css">
+</head>
+<body>
+    <main>
+        <div class="main-header">
+            <h1>상속세 계산</h1>
+            <button id="save-pdf-btn" class="action-btn">PDF로 저장</button>
+        </div>
+        <div class="calculator-card">
+            <h2>상속세 계산 (현재 기준)</h2>
+            <div class="controls-section">
+                <div class="control-item checkbox-control">
+                    <input type="checkbox" id="has-spouse" checked>
+                    <label for="has-spouse">배우자 유무</label>
+                </div>
+                <div class="control-item number-control">
+                    <label for="num-children">자녀 수</label>
+                    <button id="children-decrement" aria-label="자녀 수 감소">-</button>
+                    <input type="number" id="num-children" value="1" min="0">
+                    <button id="children-increment" aria-label="자녀 수 증가">+</button>
+                </div>
+            </div>
+
+            <div class="inputs-section">
+                <div class="input-row">
+                    <label for="stock-value">주식가치</label>
+                    <div class="input-wrapper">
+                        <input type="number" id="stock-value" value="30" placeholder="0">
+                        <span>억 원</span>
+                    </div>
+                </div>
+                <div class="input-row">
+                    <label for="financial-assets">금융자산</label>
+                    <div class="input-wrapper">
+                        <input type="number" id="financial-assets" value="0" placeholder="0">
+                        <span>억 원</span>
+                    </div>
+                </div>
+                <div class="input-row">
+                    <label for="real-estate">부동산</label>
+                    <div class="input-wrapper">
+                        <input type="number" id="real-estate" value="0" placeholder="0">
+                        <span>억 원</span>
+                    </div>
+                </div>
+                <div class="input-row">
+                    <label for="deemed-assets">간주상속재산</label>
+                    <div class="input-wrapper">
+                        <input type="number" id="deemed-assets" value="0" placeholder="0">
+                        <span>억 원</span>
+                    </div>
+                </div>
+                <div class="input-row">
+                    <label for="debt">채무</label>
+                    <div class="input-wrapper">
+                        <input type="number" id="debt" value="0" placeholder="0">
+                        <span>억 원</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="results-section">
+                <div class="result-row">
+                    <span>총 상속재산 가액</span>
+                    <strong id="total-inheritance-value">0.0 억원</strong>
+                </div>
+                <div class="result-row">
+                    <span>금융재산공제</span>
+                    <strong id="financial-asset-deduction">0.0 억원</strong>
+                </div>
+                <div class="result-row">
+                    <span>일괄공제/기타공제</span>
+                    <strong id="lump-sum-deduction">0.0 억원</strong>
+                </div>
+                <div class="result-row">
+                    <span>배우자 공제</span>
+                    <strong id="spouse-deduction">0.0 억원</strong>
+                </div>
+                <div class="result-row">
+                    <span>과세표준</span>
+                    <strong id="tax-base">0.0 억원</strong>
+                </div>
+                <div class="result-row final-result">
+                    <span>예상 상속세액</span>
+                    <strong id="estimated-tax">0.0 억원</strong>
+                </div>
+            </div>
+            
+            <p class="disclaimer">* 본 계산은 상속세 및 증여세법에 따른 약식 계산이며, 실제 세액은 개별 상황에 따라 달라질 수 있습니다. (사전증여재산 등 미반영)</p>
+        </div>
+
+        <div class="calculator-card simulation-card">
+            <h2>상속세 시뮬레이션 (미래 기준)</h2>
+
+            <div class="simulation-controls">
+                 <div class="sim-control-row">
+                    <label>주식가치상승률</label>
+                    <div class="number-control">
+                        <button id="stock-rate-decrement" aria-label="주식가치 상승률 감소">-</button>
+                        <input type="text" id="stock-rate" value="2.0%" readonly>
+                        <button id="stock-rate-increment" aria-label="주식가치 상승률 증가">+</button>
+                    </div>
+                </div>
+                <div class="sim-control-row">
+                    <label>금융자산상승률</label>
+                    <div class="number-control">
+                        <button id="financial-rate-decrement" aria-label="금융자산 상승률 감소">-</button>
+                        <input type="text" id="financial-rate" value="2.0%" readonly>
+                        <button id="financial-rate-increment" aria-label="금융자산 상승률 증가">+</button>
+                    </div>
+                </div>
+                <div class="sim-control-row">
+                    <label>부동산상승률</label>
+                    <div class="number-control">
+                        <button id="real-estate-rate-decrement" aria-label="부동산 상승률 감소">-</button>
+                        <input type="text" id="real-estate-rate" value="3.0%" readonly>
+                        <button id="real-estate-rate-increment" aria-label="부동산 상승률 증가">+</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="chart-section">
+                <h3>총 상속재산 및 예상 상속세</h3>
+                <div class="chart-container" id="chart-container"></div>
+                <div class="chart-legend">
+                    <span class="legend-item asset-bar">총 상속재산</span>
+                    <span class="legend-item tax-bar">예상 상속세액</span>
+                </div>
+            </div>
+
+            <div class="details-section">
+                <div class="details-table-wrapper">
+                    <table class="details-table">
+                        <thead>
+                            <tr>
+                                <th>항목</th>
+                                <th>현재 시점</th>
+                                <th>10년 후</th>
+                                <th>20년 후</th>
+                                <th>30년 후</th>
+                            </tr>
+                        </thead>
+                        <tbody id="details-tbody">
+                            <!-- Rows will be generated by JS -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+             <p class="disclaimer">* 본 계산은 상속세 및 증여세법에 따른 약식 계산이며, 실제 세액은 개별 상황에 따라 달라질 수 있습니다. (사전증여재산 등 미반영)</p>
+        </div>
+
+        <div id="second-simulation-card" class="calculator-card simulation-card">
+            <h2>2차 상속세 시뮬레이션 (미래 기준)</h2>
+
+            <div class="chart-section">
+                <h3>총 상속재산 및 예상 상속세</h3>
+                <div class="chart-container" id="chart-container-2"></div>
+                <div class="chart-legend">
+                    <span class="legend-item asset-bar">총 상속재산</span>
+                    <span class="legend-item tax-bar">예상 상속세액</span>
+                </div>
+            </div>
+
+            <div class="details-section">
+                <div class="details-table-wrapper">
+                    <table class="details-table">
+                        <thead>
+                            <tr>
+                                <th>항목</th>
+                                <th>현재 시점</th>
+                                <th>10년 후</th>
+                                <th>20년 후</th>
+                                <th>30년 후</th>
+                            </tr>
+                        </thead>
+                        <tbody id="details-tbody-2">
+                            <!-- Rows will be generated by JS -->
+                        </tbody>
+                    </table>
+                </div>
+                <div class="simulation-footer">
+                    <p class="disclaimer">* 본 계산은 1차 상속 후 배우자 사망 시 발생하는 상속세를 가정한 약식 계산입니다.</p>
+                     <div class="years-passed-container">
+                        <label for="years-passed">1차 상속 후</label>
+                        <div class="input-wrapper">
+                            <input type="number" id="years-passed" value="0" min="0">
+                            <span>년 후</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- PDF File Name Modal -->
+    <div id="pdf-name-modal" class="modal-overlay hidden">
+        <div class="modal-content">
+            <h3>PDF 파일 이름 입력</h3>
+            <input type="text" id="pdf-file-name" placeholder="파일 이름을 입력하세요">
+            <div class="modal-actions">
+                <button id="cancel-pdf-name" class="modal-btn cancel-btn">취소</button>
+                <button id="confirm-pdf-name" class="modal-btn confirm-btn">저장</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script type="module" src="./index.tsx"></script>
+<script type="module" src="/index.tsx"></script>
+</body>
+</html>
