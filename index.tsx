@@ -4,7 +4,10 @@ import { createRoot } from 'react-dom/client';
 
 const App = () => {
     const [activePage, setActivePage] = useState('home');
-    const [heroVideoUrl, setHeroVideoUrl] = useState('./background-video.mp4');
+    const [heroVideo, setHeroVideo] = useState({
+        url: './background-video.mp4',
+        type: 'video/mp4'
+    });
     const videoInputRef = useRef<HTMLInputElement>(null);
 
     const personalProjects = [
@@ -66,7 +69,7 @@ const App = () => {
         if (e.target.files && e.target.files[0]) {
             const file = e.target.files[0];
             const videoUrl = URL.createObjectURL(file);
-            setHeroVideoUrl(videoUrl);
+            setHeroVideo({ url: videoUrl, type: file.type });
         }
     };
 
@@ -86,7 +89,8 @@ const App = () => {
             <main>
                 {activePage === 'home' && (
                     <section className="hero">
-                        <video src={heroVideoUrl} key={heroVideoUrl} autoPlay loop muted playsInline className="hero-video">
+                        <video key={heroVideo.url} autoPlay loop muted playsInline className="hero-video">
+                            <source src={heroVideo.url} type={heroVideo.type} />
                             Your browser does not support the video tag.
                         </video>
                         <div className="hero-overlay"></div>
