@@ -1,3 +1,4 @@
+
 import React, { useState, useRef } from 'react';
 import { createRoot } from 'react-dom/client';
 
@@ -85,8 +86,7 @@ const App = () => {
             <main>
                 {activePage === 'home' && (
                     <section className="hero">
-                        <video key={heroVideoUrl} autoPlay loop muted playsInline className="hero-video">
-                            <source src={heroVideoUrl} type="video/mp4" />
+                        <video src={heroVideoUrl} key={heroVideoUrl} autoPlay loop muted playsInline className="hero-video">
                             Your browser does not support the video tag.
                         </video>
                         <div className="hero-overlay"></div>

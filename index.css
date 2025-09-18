@@ -277,5 +277,4 @@ section h2 {
     overflow: hidden;
     border: 1px solid var(--border-color);
     border-radius: 8px;
-    min-height: 70vh;
-}
+    min-height: 70vh; /* Give
