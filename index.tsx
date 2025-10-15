@@ -14,27 +14,27 @@ const App = () => {
         {
             title: '재무목표분석툴',
             description: '재무설계의 시작은 내가 꿈꾸는 재무목표들이 시간과 투자수익률에 따라 어떻게 변하는지 인생전체를 보면서 시뮬레이션 하는 것에서 시작합니다.',
-            link: 'https://cfp.yjinpapa.com/pfp'
+            link: 'https://cfp.jminpapa.com/pfp'
         },
                 {
             title: '상속세 계산툴',
             description: '자산 이전을 계획하는 고객을 위해 예상 상속세를 시뮬레이션하여 적정한 증여시점을 찾아 효과적인 절세 방안을 제시합니다.',
-            link: 'https://cfp.yjinpapa.com/inhe'
+            link: 'https://cfp.jminpapa.com/inhe'
         },
         {
             title: '은퇴설계 시뮬레이터',
             description: '은퇴설계의 로직을 이해하고, 나에게 필요하고 준비할 수 있는 은퇴자금을 계산하여 부족한 은퇴자금을 준비하는 합리적인 방법을 보여줍니다.',
-            link: 'https://cfp.yjinpapa.com/retire'
+            link: 'https://cfp.jminpapa.com/retire'
         },
         {
             title: '양도소득세 계산기',
             description: '부동산 양도 시 발생하는 세금을 간단하게 알아보세요.',
-            link: 'https://cfp.yjinpapa.com/realtax'
+            link: 'https://cfp.jminpapa.com/realtax'
         },
         {
             title: '부동산 투자 분석',
             description: '보유기간, 양도소득세를 감안한 수익률을 편리하게 계산하세요.',
-            link: 'https://cfp.yjinpapa.com/real'
+            link: 'https://cfp.jminpapa.com/real'
         }
     ];
 
@@ -42,22 +42,22 @@ const App = () => {
         {
             title: '기업경영분석툴',
             description: '크레탑의 정보를 입력하면 기업분석을 통해 주식평가액, 상속세 등을 시뮬레이션 할 수 있습니다.',
-            link: 'https://cfp.yjinpapa.com/cor'
+            link: 'https://cfp.jminpapa.com/cor'
         },
         {
             title: '기업자료 JSON 변환기',
             description: '크레탑의 자료를 읽어들여 JSON으로 변경하는 자료입니다. 여기에서 저장한 자료를 기업경영분석툴에서 읽어들여서 분석하세요.',
-            link: 'https://cfp.yjinpapa.com/json'
+            link: 'https://cfp.jminpapa.com/json'
         },
                 {
             title: 'DCF 분석툴',
             description: 'JSON자료를 읽어들여 기업의 가치를 DCF법으로 평가하는 툴입니다. 제미나이 API가 있어야 사용할 수 있습니다.',
-            link: 'https://cfp.yjinpapa.com/dcf'
+            link: 'https://cfp.jminpapa.com/dcf'
         },
         {
             title: '임원적정급여 계산툴',
             description: '4대보험, 직원들 눈치가 무서워서 아직도 급여를 낮게 가져가시나요? 수익의 규모나 플랜에 따라 임원의 급여는 달려져야 합니다. 여기 있는 임원적정급여 계산툴로 직접 계산해보세요.',
-            link: 'https://cfp.yjinpapa.com/esalary'
+            link: 'https://cfp.jminpapa.com/esalary'
         }
     ];
 
